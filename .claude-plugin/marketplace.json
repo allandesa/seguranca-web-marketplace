@@ -1,0 +1,12 @@
+{
+  "name": "allan-skills",
+  "description": "Skills e plugins pessoais do Allan Carvalho para Claude Code.",
+  "owner": { "name": "Allan Carvalho" },
+  "plugins": [
+    {
+      "name": "seguranca-web-completa",
+      "source": "./plugins/seguranca-web-completa",
+      "description": "Auditoria de seguranca web/API: controle de acesso, criptografia/config, injecao, upload de arquivos, prompt injection, plano de pentest e procedimento de auditoria."
+    }
+  ]
+}
