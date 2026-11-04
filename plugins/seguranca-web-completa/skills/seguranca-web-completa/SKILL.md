@@ -35,6 +35,9 @@ Dois modos, e o diagnóstico é sempre o padrão:
    de "protegido" cola o código que protege. Sem evidência rastreada = **NÃO VERIFICADO**, nunca
    "OK". Isso vale nos dois sentidos: não afirme falha sem localizar, nem segurança sem colar a
    defesa.
+   **Exceção:** para segredo/credencial exposta, a evidência é `arquivo:linha` + o **tipo** da
+   credencial (ex.: "chave de API da Stripe", "senha de banco") — **nunca o valor em si**. Colar o
+   valor no relatório cria um segundo vazamento (o próprio relatório passa a guardar o segredo).
 
 2. **Ausência de prova não é prova de segurança.** Não achar a falha pode ser ausência dela — ou
    que você não olhou no lugar certo. Declare a cobertura real. Nenhuma auditoria de escopo
@@ -64,9 +67,12 @@ Confirme a trava READ-ONLY explicitamente ao usuário antes de começar.
 
 Mapeie a stack (linguagem/framework, camada de dados, mecanismo de auth, servidor web) e a
 superfície (rotas, o que recebe input, o que faz upload, o que toca o filesystem, o que fala com
-serviços externos, onde há IA/LLM). Depois, para a classe da rodada, **documente o padrão
-pretendido** em uma frase ("O padrão de auth é X") — o baseline contra o qual você detecta desvio.
-Método detalhado em `references/procedimento-auditoria.md`.
+serviços externos, onde há IA/LLM). **Mapeie também os dados sensíveis:** quais existem (PII,
+senha, dado financeiro/saúde, segredo), por onde circulam, onde ficam armazenados e quem/o que
+pode acessá-los — esse mapa é o que alimenta a priorização por raio de dano (
+`references/procedimento-auditoria.md`) e a seção de LGPD. Depois, para a classe da rodada,
+**documente o padrão pretendido** em uma frase ("O padrão de auth é X") — o baseline contra o qual
+você detecta desvio. Método detalhado em `references/procedimento-auditoria.md`.
 
 ### Passo 2 — Inventário exaustivo
 
@@ -137,6 +143,9 @@ quebrar o que funciona, e reexecutando o teste relevante para confirmar que o fu
 - Segredo no código "porque o repo é privado" — repo privado vaza; segredo que esteve no git está
   comprometido e precisa rotação.
 - SHA-256+salt para senha (a defesa é bcrypt/scrypt/Argon2).
+- Implementar hash, cifra, token ou verificação de assinatura **própria** em vez de usar biblioteca
+  consolidada ("rolar a própria cripto/auth") — mesmo bem-intencionado, costuma ter furo que a lib
+  testada não tem.
 - Afirmar segurança sem colar o trecho que protege.
 
 ## Arquivos de referência

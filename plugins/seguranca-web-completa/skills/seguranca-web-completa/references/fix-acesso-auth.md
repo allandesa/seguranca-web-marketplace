@@ -150,6 +150,23 @@ sensível.
 
 ---
 
+## 8. Teste de regressão obrigatório após qualquer correção desta classe
+
+Toda correção de 1-6 só conta como validada depois de reexecutar estes 4 cenários (gere um teste
+automatizado para cada, não só manual):
+
+| # | Cenário | Requisição | Esperado |
+|---|---|---|---|
+| 1 | Sem login | Chama a rota protegida sem sessão/token | 401, nunca o dado |
+| 2 | Sessão/token expirado | Chama com sessão vencida ou token expirado | 401, nunca o dado |
+| 3 | Autenticado sem permissão | Usuário autenticado, sem o papel/permissão exigido, chama a ação | 403, ação não executa |
+| 4 | Cross-user (IDOR) | Usuário A autenticado chama a rota trocando o id pelo recurso do usuário B, em cada verbo (GET/PUT/DELETE) | 403/404, nunca o dado ou a alteração do B |
+
+Use dado fictício nesses testes, nunca produção. Se o cenário 4 falhar em qualquer verbo, a
+correção do item 2 está incompleta — é comum proteger o `GET` e esquecer o `DELETE`/`PUT`.
+
+---
+
 ## Resumo
 
 | Falha | Correção-raiz | Critério |

@@ -44,6 +44,23 @@ fraca ou default.
   só remover, é **rotacionar a credencial**. Aponte isso.
 - **PASS:** segredos em variáveis de ambiente / cofre; `.env` no `.gitignore`; `.env.example`
   apenas com placeholders.
+- **Ao reportar, nunca cole o valor do segredo** — só `arquivo:linha` + o tipo de credencial (ver
+  exceção à regra de evidência no `SKILL.md`).
+
+### a.1) Segredo vazando pro bundle do frontend
+Vetor distinto do anterior: a variável existe só em `.env`/config do servidor, mas é **injetada no
+JS enviado ao navegador** por engano — qualquer um vê via devtools/`view-source`, sem precisar de
+acesso ao repositório.
+- **Procure:** prefixo de env var que o framework expõe ao client por convenção (`NEXT_PUBLIC_*`
+  no Next.js, `VITE_*` no Vite, `REACT_APP_*` no CRA) aplicado a um segredo real (chave de API
+  privada, segredo de servidor) em vez de só a valores já públicos; `DefinePlugin`/webpack
+  injetando env inteiro no bundle; chamada de API que devolve o objeto de config completo do
+  servidor (incluindo chaves) para o cliente.
+- **FAIL:** segredo de servidor acessível no bundle JS entregue ao navegador (inspecione o
+  JS compilado/minificado, não só o código-fonte — o segredo pode não aparecer no source mas
+  aparecer no build).
+- **PASS:** só valores já públicos (ex.: chave pública de analytics) usam o prefixo client-side;
+  segredo de servidor nunca atravessa para o bundle.
 
 ### b) CORS
 - **Procure:** `Access-Control-Allow-Origin: *` combinado com credenciais, ou `origin: true`

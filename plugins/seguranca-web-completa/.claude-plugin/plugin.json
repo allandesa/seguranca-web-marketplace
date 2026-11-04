@@ -1,6 +1,6 @@
 {
   "name": "seguranca-web-completa",
   "description": "Auditoria de seguranca web/API: controle de acesso, criptografia/config, injecao, upload de arquivos, prompt injection, plano de pentest e procedimento de auditoria.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": { "name": "Allan Carvalho" }
 }
