@@ -1,0 +1,6 @@
+{
+  "name": "revisao-banco",
+  "description": "Revisao de queries e de banco: consulta sem filtro nem limite, combo que carrega o cadastro inteiro, subquery correlacionada por linha, N+1, predicado sem indice, escrita em massa, migration que trava tabela, e leitura de plano de execucao.",
+  "version": "1.0.0",
+  "author": { "name": "Allan Carvalho" }
+}
