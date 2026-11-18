@@ -54,7 +54,8 @@ Para cada FAIL e WARN:
 - **Cenário de ataque:** como um atacante explora, e o que ganha (o impacto concreto).
 - **Alcance:** público / autenticado / requer privilégio — o que contextualiza a severidade.
 - **Correção:** o padrão que resolve + **ponteiro para a skill/seção** que implementa
-  (`hardening-seguranca-web` / `defesa-prompt-injection` / config de servidor).
+  (`references/fix-injecao.md` / `references/fix-upload-arquivos.md` / `references/fix-acesso-auth.md` /
+  `references/fix-cripto-config.md` / `references/ia-prompt-injection.md` / config de servidor).
 
 ## 4. Score
 

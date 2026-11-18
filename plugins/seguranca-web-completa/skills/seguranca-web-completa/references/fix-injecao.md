@@ -93,7 +93,7 @@ if (!egressPermitido.has(url.hostname)) reject("destino não permitido");
 // bloquear também faixas internas: 127.0.0.0/8, 10/8, 172.16/12, 192.168/16, 169.254.169.254
 // e NÃO seguir redirect para fora da allowlist
 ```
-Mesma lógica de egress da skill `defesa-prompt-injection` — se o sistema tem IA e faz requisições,
+Mesma lógica de egress de `references/ia-prompt-injection.md` (correção, item 4) — se o sistema tem IA e faz requisições,
 o egress vale para os dois.
 
 **Critério:** destino de saída restrito por allowlist; faixas internas/link-local bloqueadas;

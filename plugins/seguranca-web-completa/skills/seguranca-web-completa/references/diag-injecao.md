@@ -40,7 +40,7 @@ Concatenação de input em query. Os sinais, por stack:
   aqui a defesa é **allowlist** de valores permitidos, não escape.
 - **Cast a int resolve SÓ campos numéricos.** Não estenda a falsa sensação para strings.
 
-### O que a correção vai exigir (aponte para hardening-seguranca-web)
+### O que a correção vai exigir (aponte para `references/fix-injecao.md`)
 Prepared statements/binding em 100% do caminho; allowlist para identificadores; nunca confiar em
 escape manual como defesa principal.
 
@@ -146,8 +146,8 @@ parametrizável.
   da allowlist.
 
 ### Defesa
-Allowlist de domínios/IPs de saída (egress) — a mesma lógica de egress da skill
-`defesa-prompt-injection`. Bloquear faixas privadas e link-local. Não confiar em blocklist.
+Allowlist de domínios/IPs de saída (egress) — a mesma lógica de egress de
+`references/ia-prompt-injection.md` (correção, item 4). Bloquear faixas privadas e link-local. Não confiar em blocklist.
 
 ---
 
